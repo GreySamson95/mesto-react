@@ -4,30 +4,43 @@ import React, { useState, useEffect } from 'react'
 
 function Main(props) {
     const [userName, setUserName] = useState('')
-    const [userDescription, setuserDescription] = useState('')
-    const [userAvatar, setuserAvatar] = useState('')
+    const [userDescription, setUserDescription] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
     const [cards, getCards] = useState([])
 
-    function getInformation() {
+    // function getInformation() {
+    //     api.getAllNeededData()
+    //         .then((result) => {
+    //             const [userData, dataFromSecondPromise] = result
+    //             setUserName(userData.name)
+    //             setUserDescription(userData.about)
+    //             setUserAvatar(userData.avatar)
+    //             return dataFromSecondPromise
+    //         })
+    //         .then((dataFromSecondPromise) => {
+    //             getCards(dataFromSecondPromise)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }
+
+    // useEffect(() => {
+    //     getInformation({})
+    // }, [])
+
+    useEffect(() => {
         api.getAllNeededData()
-            .then((result) => {
-                const [dataFromFirstPromise, dataFromSecondPromise] = result
-                setUserName(dataFromFirstPromise.name)
-                setuserDescription(dataFromFirstPromise.about)
-                setuserAvatar(dataFromFirstPromise.avatar)
-                return dataFromSecondPromise
-            })
-            .then((dataFromSecondPromise) => {
+            .then(([userData,dataFromSecondPromise]) => {
+                setUserName(userData.name)
+                setUserDescription(userData.about)
+                setUserAvatar(userData.avatar)
                 getCards(dataFromSecondPromise)
             })
             .catch((err) => {
                 console.log(err)
-            })
-    }
-
-    useEffect(() => {
-        getInformation({})
-    }, [])
+            });
+    }, []);
 
     return (
         <>
@@ -44,9 +57,9 @@ function Main(props) {
                 <button className="profile__add-button" type="button" aria-label="Добавить" onClick={props.onAddPlace}></button>
             </section>
             <section className="elements">
-                {cards.map((item) => {
+                {cards.map((item, index) => {
                     return (
-                        <Card card={item} onCardClick={props.onCardClick} isOpen={props.onDeleteImage} />
+                        <Card key={index} card={item} onCardClick={props.onCardClick} isOpen={props.onDeleteImage} />
                     )
                 })}
             </section>

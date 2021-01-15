@@ -1,3 +1,4 @@
+import React from 'react'
 import logo from '../images/mesto-logo.svg'
 
 function Header() {
