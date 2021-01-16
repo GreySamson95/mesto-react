@@ -25,7 +25,7 @@ class Api {
             .then(this._getResponseData)
     }
 
-    getAllNeededData() {
+    getInitialData() {
         return Promise.all([this.getInformation(), this.getInitialCards()])
     }
 
