@@ -10,11 +10,11 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteIm
 
     useEffect(() => {
         api.getInitialData()
-            .then(([userData,dataFromSecondPromise]) => {
+            .then(([userData,cardData]) => {
                 setUserName(userData.name)
                 setUserDescription(userData.about)
                 setUserAvatar(userData.avatar)
-                getCards(dataFromSecondPromise)
+                getCards(cardData)
             })
             .catch((err) => {
                 console.log(err)
@@ -38,7 +38,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteIm
             <section className="elements">
                 {cards.map((item) => {
                     return (
-                        <Card key={item._id} card={item} onCardClick={onCardClick} isOpen={onDeleteImage} />
+                        <Card key={item._id} card={item} onCardClick={onCardClick} onDeleteImage={onDeleteImage} />
                     )
                 })}
             </section>

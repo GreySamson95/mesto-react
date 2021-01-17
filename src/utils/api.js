@@ -12,14 +12,14 @@ class Api {
     }  
 
     getInitialCards() {
-        return fetch(`${this._url}cards`, {
+        return fetch(`${this._url}/cards`, {
                 headers: this._headers,
             })
             .then(this._getResponseData)
     }
 
     getInformation() {
-        return fetch(`${this._url}users/me`, {
+        return fetch(`${this._url}/users/me`, {
                 headers: this._headers,
             })
             .then(this._getResponseData)
@@ -30,7 +30,7 @@ class Api {
     }
 
     updateInformation({ name, about }) {
-        return fetch(`${this._url}users/me`, {
+        return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -42,7 +42,7 @@ class Api {
     }
 
     updateAvatar({ avatar }) {
-        return fetch(`${this._url}users/me/avatar`, {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -53,7 +53,7 @@ class Api {
     }
 
     postPhoto({ name, link }) {
-        return fetch(`${this._url}cards`, {
+        return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -65,7 +65,7 @@ class Api {
     }
 
     deletePhoto(id) {
-        return fetch(`${this._url}cards/${id}`, {
+        return fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
             headers: this._headers,
         })
@@ -73,7 +73,7 @@ class Api {
     }
 
     likePhoto(id) {
-        return fetch(`${this._url}cards/likes/${id}`, {
+        return fetch(`${this._url}/cards/likes/${id}`, {
             method: 'PUT',
             headers: this._headers,
         })
@@ -81,7 +81,7 @@ class Api {
     }
 
     unlikePhoto(id) {
-        return fetch(`${this._url}cards/likes/${id}`, {
+        return fetch(`${this._url}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: this._headers,
         })
@@ -90,7 +90,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-18/',
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-18',
     headers: {
         authorization: '66264c4a-1a87-4c46-9ef9-8541779913f9',
         'Content-Type': 'application/json'
